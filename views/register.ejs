@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <style>
+            body{
+          font-family : 'Poppins', sans-serif;
+        
+      }
+
+      .progress{
+          height: 3px !important;
+      }
+      .show-pass{
+          position: absolute; 
+          top:28%; 
+          right:14%;
+      }
+      .fa-eye{
+          color: #022255;
+          cursor: pointer;
+      }
+
+      .progress-bar-danger{
+          background-color: #e90f10;
+      }
+      .progress-bar-warning{
+          background-color: #ffc505;
+      }
+      .progress-bar-success{
+          background-color: #02b502;
+      }
+      .fa-circle2{
+          color: rgba(219, 6, 6, 0.788);
+          font-size: 10px;
+          
+      }
+      .fa-check2{  
+        font-size: 12px;
+          color: #02b502;
+      }
+      .hidden1{
+      visibility: hidden;
+      }
+
+    </style>
+    <title>Register</title>
+</head>
+<body class="bg-light ">
+
+        <div class="modal-dialog modal-fullscreen-sm-down bg-white bg-gradient ">
+            <div class="shadow p-3 mb-1 bg-warning rounded">
+                <div class="heading text-center text-light ">
+                    <h1 class=" fw-bolder">Register</h1>
+                </div>
+            </div>
+
+            
+          </div>
+
+          <div  class=" modal-dialog modal-fullscreen-sm-down bg-white bg-gradient px-2">
+            <div class="modal-content shadow  bg-body rounded  py-sm-1 border-0">
+               <div class="modal-body ">
+                <div >
+                    <form class=" px-sm-5 px-3 py-1" action="/register" method="post"> 
+                        
+                        <div class="mb-2">
+                            <label for="Name"  class="form-label">Name</label>
+                            <span class=" text-danger">*</span>
+                            <span class=" text-danger align-content-end" id="Name-Error" hidden>This filed is requred</span>
+                            <input type="text" class="form-control
+                            border-top-0 border-end-0 border-start-0 text-center shadow-none
+                            " id="Name" name="Name" placeholder="" required>
+                          </div>
+
+                          <div class="mb-2">
+                            <label for="Surname"  class="form-label">Surname</label>
+                            <span class=" text-danger">*</span>
+                            <span class=" text-danger align-content-end" id="Surname-Error" hidden>This filed is requred</span>
+                            <input type="text" class="form-control
+                            border-top-0 border-end-0 border-start-0 text-center shadow-none
+                            " id="Surname" name="Surname" placeholder="" required>
+                          </div>
+
+                        <div class="mb-2">
+                            <label for="email"  class="form-label">Email address</label>
+                            <span class=" text-danger">*</span>
+                            <span class=" text-danger align-content-end" id="Email-Error" hidden>This filed is requred</span>
+                            <input type="email" class="form-control
+                            border-top-0 border-end-0 border-start-0 text-center shadow-none
+                            " id="email" name="email" placeholder="name@example.com" required>
+                            <% if(EmailExist==true){%>
+                              <p class=" text-danger fw-light" style="font-size:10px; font: normal;"><%=EmailError%> </p>
+                                <% } %>
+                          </div>
+
+                        <div class="mb-2">
+                            <label for="Password"  class="form-label">Password</label>
+                            <span class=" text-danger">*</span>
+                            <span class=" text-danger align-content-end" id="Password-Match" hidden >Password not strong</span>
+                            <input type="Password" class="form-control  border-top-0 border-end-0 
+                                                            border-start-0 text-center shadow-none
+                            " id="Password" name="Password" placeholder="" minlength="8" maxlength="12" required>
+                            <span class="show-pass" onclick="toggle()" >
+                                <i class="far fa-eye" onclick="myfunction(this)"></i>
+                            </span>
+                            <div id="popover-password"> 
+                              <p><span id="result"></span></p>
+                            <div class="progress">
+                              <div class="progress-bar" id="password-strength" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                            </div>
+                          </div>
+                          </div>
+
+
+                           <ul class="list-unstyled ">
+                              <li>
+                                <span class="low-upper-case">
+                                    <i class="fas fa-check-circle" aria-hidden="false">
+                                    </i> Lowercase &amp; Uppercase
+                                </span>
+                              </li>
+                              <li>
+                                <span class="one-number">
+                                    <i class="fas fa-check-circle" aria-hidden="false">
+                                    </i> One number
+                                </span>
+                              </li>
+                              <li>
+                                <span class="one-special-char">
+                                    <i class="fas fa-check-circle" aria-hidden="false">
+                                    </i> Special character (!@#$%^&)
+                                </span>
+                              </li>
+                              <li>
+                                <span class="eight-character">
+                                    <i class="fas fa-check-circle" aria-hidden="false">
+                                    </i> Atleast 8 characters
+                                </span>
+                              </li>
+                           </ul>
+                        
+
+                          <div class="mb-2">
+                            <label for="ConfirmPassword" name="ConfirmPassword" class="form-label">Confirm Password</label>
+                            <span class=" text-danger">*</span>
+                            
+                            <input type="Password" class="form-control  border-top-0 border-end-0 
+                                                            border-start-0 text-center shadow-none
+                            " id="ConfirmPassword" name="ConfirmPassword" placeholder="" minlength="8" maxlength="12" required>
+                            <div class="matchDiv text-danger align-content-end" style="font-size:10px"  >
+                              <p class="Password-Match hidden1">Password does not match</p>
+                            </div>
+                            </div>
+                           <div class="mb-2">
+                            <label for="Countries" class="form-label ">Country</label>
+                                <input class="form-control border-top-0 border-end-0 
+                                border-start-0 text-center shadow-none" list="datalistOptions" id="Countries" id="Country" placeholder="Type to search...">
+                                <datalist id="datalistOptions">
+                                <option value="Namibia">
+                                <option value="South Africa">
+                                <option value="Zambia">
+                                <option value="Zimbabwe">
+                                <option value="Ukraine">
+                                    <option value="Russia">
+                                        <option value="Egypt">
+                                        <option value="Mozambique">
+                                        <option value="Botswana">
+                                        <option value="Congo">
+                                </datalist>
+                            </div>
+
+                            <div class="mb-2 ">
+                              <label for="Birthday"  class="form-label">Date of Birth</label>
+                              
+                              <input type="date" class="form-control  border-top-0 border-end-0 
+                                                              border-start-0 text-center shadow-none
+                              " id="Birthday" name="Birthday"  >
+                            </div>
+                            
+                            <div class="mb-2"> 
+                                <div class="mb-2 py-2" >
+                                    <label>Favourite Color</label>
+                                </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Color" id="inlineRadio1" value="Red">
+                                <label class="form-check-label" for="inlineRadio1">Red</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Color" id="inlineRadio2" value="Green">
+                                <label class="form-check-label" for="inlineRadio2">Green</label>
+                              </div>
+                              <div class="form-check form-check-inline mb-2">
+                                <input class="form-check-input" type="radio" name="Color" id="inlineRadio3" value="Blue" >
+                                <label class="form-check-label" for="inlineRadio3">Blue </label>
+                              </div>
+
+                              <div class="mb-2 ">
+                                <label for="CellNo"  class="form-label">Cellphone Number</label>
+                                
+                                <span class=" text-danger align-content-end" id="CellNo-Error" hidden >Invalid Contact</span>
+                                <input type="text" class="form-control  border-top-0 border-end-0 
+                                                                border-start-0 text-center shadow-none
+                                " id="CellNo" name="CellNumber" placeholder="" minlength="10" maxlength="10" pattern="[0]{1}[6-8]{1}[0-9]{8}" >
+                              </div>
+
+                              <div class="mb-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="Comment" style="height: 100px" name="Comment"></textarea>
+                                    <label for="Comment">Comments</label>
+                                  </div>
+                              </div>
+                                
+                          <div class="mb-3 ">
+                            <button type="submit" class="btn btn-warning" id="Submit">Register</button>
+                          </div>
+                          </div>
+
+
+                    </form>
+                    <div class=" fw-light text-center">
+                        <p>Already have an account? Log in <a href="login">here</a></p>
+                    </div>
+                </div>             
+            </div> </div>  
+          </div>
+          
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> 
+   
+</body>
+
+  <script>
+
+var Email = document.getElementById('email');
+let state=false;
+let success = false;
+let Password = document.getElementById('Password')
+let PasswordStrength = document.getElementById('password-strength')
+let Button = document.getElementById('Submit')
+let lowerUpperCase = document.querySelector('.low-upper-case')
+let number = document.querySelector('.one-number')
+let specialChar = document.querySelector('.one-special-char')
+let eightChar = document.querySelector('.eight-character')
+let passMatch = document.querySelector('.Password-Match')
+let confirmPass = document.getElementById('ConfirmPassword')
+
+ function myfunction(show){
+   show.classList.toggle('fa-eye-slash')
+ }
+ function toggle(){
+  if(state){
+    Password.setAttribute("type","password")
+    state= false;
+  }else{
+    Password.setAttribute("type","text")
+    state=true;
+  }
+
+ }
+ Password.addEventListener('keyup',()=>{
+   let pass = Password.value;
+   checkStrength(pass);
+ })
+
+ function checkStrength(Password){
+    let strength = 0;
+
+    if(Password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)){
+      strength +=1;
+      lowerUpperCase.classList.add('fa-check2') 
+    }else{
+      lowerUpperCase.classList.remove('fas') 
+      lowerUpperCase.classList.remove('fa-check2') 
+      lowerUpperCase.classList.add('fa-circle2') 
+    }
+
+    if(Password.match(/([0-9])/)){
+      strength +=1;
+      number.classList.add('fa-check2')  
+    }else{
+      number.classList.remove('fas')
+      number.classList.remove('fa-check2')
+      number.classList.add('fa-circle2') 
+    }
+
+    if(Password.match(/([!,@,#,$,%,^,&,.])/)){
+      strength +=1;
+
+      specialChar.classList.add('fa-check2')
+    }else{
+      specialChar.classList.remove('fas')
+      specialChar.classList.remove('fa-check2')
+      specialChar.classList.add('fa-circle2') 
+    }
+    if(Password.length>7){
+      strength +=1;
+
+      eightChar.classList.add('fa-check2')
+    }else{
+      eightChar.classList.remove('fas')
+      eightChar.classList.remove('fa-check2')
+      eightChar.classList.add('fa-circle2') 
+    }
+
+    if(strength==0){
+      PasswordStrength.style= "width: 0%";
+    }else if(strength==1){
+      PasswordStrength.classList.remove('progress-bar-warning');
+      PasswordStrength.classList.remove('progress-bar-success');
+      PasswordStrength.classList.add('progress-bar-danger');
+      PasswordStrength.style= "width: 15%";
+    }else if(strength==2){
+      PasswordStrength.classList.remove('progress-bar-warning');
+      PasswordStrength.classList.remove('progress-bar-success');
+      PasswordStrength.classList.add('progress-bar-warning');
+      PasswordStrength.style= "width: 45%";
+    }else if(strength==3){
+      PasswordStrength.classList.remove('progress-bar-danger');
+      PasswordStrength.classList.remove('progress-bar-success');
+      PasswordStrength.classList.add('progress-bar-warning');
+      PasswordStrength.style= "width: 75%";
+    }else if(strength==4){
+      PasswordStrength.classList.remove('progress-bar-warning');
+      PasswordStrength.classList.remove('progress-bar-danger');
+      PasswordStrength.classList.add('progress-bar-success');
+      PasswordStrength.style= "width: 100%";
+      success=true;
+    }
+
+ }
+
+ Button.addEventListener('click',(e)=>{
+  let pass = confirmPass.value;
+  let pass1st = Password.value;
+  success=true;
+
+  if(pass!=pass1st){
+     success=false;
+     console.log(pass)
+     console.log(pass1st)
+     //passMatch.innerHTML= "Password does not match!";
+     passMatch.classList.remove('hidden1');
+    }else{
+      success=true;
+    }
+
+    if(!success){
+      e.preventDefault();
+    }
+ })
+
+
+
+  </script>
+</html>

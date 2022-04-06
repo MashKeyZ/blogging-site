@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 18.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "LogInSystem", "LogInSystem\LogInSystem.ssmssqlproj", "{70771F18-B899-44D8-ABCC-2C276F55B923}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70771F18-B899-44D8-ABCC-2C276F55B923}.Default|Default.ActiveCfg = Default
+		{43496F93-68AB-4AEA-94F5-4DEBD754FA2E}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D1A2E6C-5CEC-4E1A-BEB9-6112BCBD0D90}
+	EndGlobalSection
+EndGlobal
